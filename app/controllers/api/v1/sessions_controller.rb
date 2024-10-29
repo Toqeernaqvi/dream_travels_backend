@@ -1,19 +1,19 @@
-# app/controllers/api/v1/sessions_controller.rb
-class Api::V1::SessionsController < API::BaseController
-  respond_to :json
-
-  private
-
-  def respond_with(resource, _opts = {})
-    token = request.env['warden-jwt_auth.token']
-    render json: {
-      status: { code: 200, message: 'Logged in successfully.' },
-      data: resource,
-      token: token
-    }, status: :ok
-  end
-
-  def respond_to_on_destroy
-    render json: { status: { message: 'Logged out successfully.' } }, status: :ok
+module Api
+  module V1
+    class SessionsController < Devise::SessionsController
+      def create
+        super { @token = current_token }
+      end
+    
+      def show
+      end
+    
+      private
+    
+      def current_token
+        request.env['warden-jwt_auth.token']
+      end
+    end
+    
   end
 end
