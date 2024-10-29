@@ -1,14 +1,19 @@
+# config/routes.rb
+
 Rails.application.routes.draw do
-  get 'users/index'
-  get 'users/show'
-  # Devise routes with custom controllers
-  devise_for :users, controllers: {
-    registrations: 'users/registrations',
-    sessions: 'users/sessions'
-  }
+  namespace :api do               # Make sure this is all lowercase
+    namespace :v1 do               # Make sure this is all lowercase
+      devise_for :users, controllers: {
+        registrations: 'api/v1/registrations',
+        sessions: 'api/v1/sessions'
+      }, path: '', path_names: {
+        sign_in: 'sign_in',
+        sign_out: 'sign_out',
+        registration: 'sign_up'
+      }
 
-  # Route to display users in Rails app
-  resources :users, only: [:index, :show]
-
-  # You can add other routes here
+      # Example of a protected route
+      resources :users, only: [:index, :show]
+    end
+  end
 end

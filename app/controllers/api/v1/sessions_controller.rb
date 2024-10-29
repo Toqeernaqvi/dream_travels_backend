@@ -1,6 +1,5 @@
-# app/controllers/users/sessions_controller.rb
-
-class Users::SessionsController < Devise::SessionsController
+# app/controllers/api/v1/sessions_controller.rb
+class Api::V1::SessionsController < API::BaseController
   respond_to :json
 
   private

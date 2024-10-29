@@ -1,9 +1,12 @@
-# app/controllers/users/registrations_controller.rb
-
-class Users::RegistrationsController < Devise::RegistrationsController
+# app/controllers/api/v1/registrations_controller.rb
+class Api::V1::RegistrationsController < API::BaseController
   respond_to :json
 
   private
+
+  def sign_up_params
+    params.require(:user).permit(:username, :email, :cell_no, :post_code, :door_no, :password, :password_confirmation)
+  end
 
   def respond_with(resource, _opts = {})
     if resource.persisted?
@@ -20,3 +23,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 end
+ 
