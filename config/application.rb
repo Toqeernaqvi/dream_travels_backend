@@ -23,7 +23,7 @@ module DreamTravelBackend
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-
+ 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins 'http://localhost:3000' # Update with your React app's URL
